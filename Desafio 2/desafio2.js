@@ -113,13 +113,21 @@ const shortsAero = new Product("SHORTS AEROREADY", "SHORTS DEPORTIVOS PARA TUS S
 
 const test = async() => {
     //Creamos archivo JSON.
-    //await nuevoJson(ruta);
+    await fs.writeFile(root, "[]");
     // Listamos array de productos, que debería estar vacío.
     await productManager.getProducts(); 
     await productManager.addProduct(remeraEsen);
     await productManager.addProduct(ZaparillasHoops);
     await productManager.addProduct(zapatillasDuramo);
     await productManager.addProduct(shortsAero);
+
+    //Actualizamos algunas propiedades de los productos.
+    await productManager.updateProduct(2, "price", 24.99);
+    await productManager.updateProduct(1, "stock", 35);
+    await productManager.updateProduct(3, "price", 29.99);
+
+    // Listamos nuevamente los productos.
+    await productManager.getProducts();
 }
 
 test()
